@@ -1,6 +1,6 @@
 package model;
 
-public class Revista extends ItemBiblioteca implements Catalogable{
+public class Revista extends ItemBiblioteca implements Catalogable {
 
     private int nroEdicion;
     private int cantidadEjemplares;
@@ -41,27 +41,29 @@ public class Revista extends ItemBiblioteca implements Catalogable{
 
     @Override
     public void prestar() {
-        if (cantidadEjemplares<1) {
+        if (cantidadEjemplares > 0) {
             cantidadEjemplares--;
-        }else{
-            System.out.println("No hay stock, sorry");
+            System.out.println("Listo!. Quedan " + cantidadEjemplares + " ejemplares.");
+        } else {
+            System.out.println("No hay stock disponible.");
         }
-        
     }
 
     @Override
     public void devolver() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        cantidadEjemplares++;
+        System.out.println("Listo!. Hay " + cantidadEjemplares + " ejemplares disponibles.");
     }
 
     @Override
     public void calcularMultas() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("El cálculo de multas no está implementado para revistas.");
     }
 
     @Override
     public void obtenerInfo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("Revista: " + nombreRevista);
+        System.out.println("Número de Edición: " + nroEdicion);
+        System.out.println("Cantidad de Ejemplares: " + cantidadEjemplares);
     }
-
 }
