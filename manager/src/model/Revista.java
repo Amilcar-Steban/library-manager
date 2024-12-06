@@ -93,3 +93,4 @@ public class Revista extends ItemBiblioteca implements Catalogable {
         this.fechaEntrega = fechaEntrega;
     }
 }
+ 
