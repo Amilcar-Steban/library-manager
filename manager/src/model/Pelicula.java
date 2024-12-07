@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class Pelicula extends ItemBiblioteca implements Catalogable{
 
-    private int nroEdicion;
     private int cantidadEjemplares;
     private String nombrePelicula;
     private LocalDate fechaEntrega;
@@ -14,19 +13,10 @@ public class Pelicula extends ItemBiblioteca implements Catalogable{
     public Pelicula() {
     }
 
-    public Pelicula(int nroEdicion, int cantidadEjemplares, String nombrePelicula, LocalDate fechaEntrega) {
-        this.nroEdicion = nroEdicion;
+    public Pelicula(int cantidadEjemplares, String nombrePelicula, LocalDate fechaEntrega) {
         this.cantidadEjemplares = cantidadEjemplares;
         this.nombrePelicula = nombrePelicula;
         this.fechaEntrega = fechaEntrega;
-    }
-
-    public int getNroEdicion() {
-        return nroEdicion;
-    }
-
-    public void setNroEdicion(int nroEdicion) {
-        this.nroEdicion = nroEdicion;
     }
 
     public int getCantidadEjemplares() {
@@ -71,22 +61,21 @@ public class Pelicula extends ItemBiblioteca implements Catalogable{
     }
 
     @Override
-    public void calcularMultas() {
+    public double calcularMultas() {
         LocalDate fechaActual = LocalDate.now();
+        double multa = 0.0;
         if (fechaEntrega.isBefore(fechaActual)) {
             long diasDeRetraso = ChronoUnit.DAYS.between(fechaEntrega, fechaActual);
-            double multa = diasDeRetraso * TARIFA_MULTA_POR_DIA; // Asumiendo que tienes una constante TARIFA_MULTA_POR_DIA
-            System.out.println("Multa actual: " + multa);
+            multa = diasDeRetraso * TARIFA_MULTA_POR_DIA;
         }
-        else {
-            System.out.println("Quedan "+(ChronoUnit.DAYS.between(fechaActual, fechaEntrega))+ " dias");
-        }
+        return multa;
     }
 
     @Override
-    public void obtenerInfo() {
-        System.out.println("Pelicula: " + nombrePelicula);
-        System.out.println("Número de Edición: " + nroEdicion);
-        System.out.println("Cantidad de Ejemplares: " + cantidadEjemplares);
+    public String obtenerInfo() {
+        String result = "Pelicula: "+nombrePelicula
+                        +"\nCantidad: "+cantidadEjemplares;
+        return result;
     }
+
 }

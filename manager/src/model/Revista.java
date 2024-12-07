@@ -41,23 +41,22 @@ public class Revista extends ItemBiblioteca implements Catalogable {
     }
 
     @Override
-    public void calcularMultas() {
+    public double calcularMultas() {
         LocalDate fechaActual = LocalDate.now();
+        double multa = 0.0;
         if (fechaEntrega.isBefore(fechaActual)) {
             long diasDeRetraso = ChronoUnit.DAYS.between(fechaEntrega, fechaActual);
-            double multa = diasDeRetraso * TARIFA_MULTA_POR_DIA; // Asumiendo que tienes una constante TARIFA_MULTA_POR_DIA
-            System.out.println("Multa actual: " + multa);
+            multa = diasDeRetraso * TARIFA_MULTA_POR_DIA;
         }
-        else {
-            System.out.println("Quedan "+(ChronoUnit.DAYS.between(fechaActual, fechaEntrega))+ " dias");
-        }
+        return multa;
     }
 
     @Override
-    public void obtenerInfo() {
-        System.out.println("Revista: " + nombreRevista);
-        System.out.println("Número de Edición: " + nroEdicion);
-        System.out.println("Cantidad de Ejemplares: " + cantidadEjemplares);
+    public String obtenerInfo() {
+        String result = "Nombre Revista: "+nombreRevista
+                        +"\nNumero de edicion: "+nroEdicion
+                        +"\nCantidad de Ejemplares: " + cantidadEjemplares;
+        return result;
     }
 
     /* GETTERS AND SETTERS */

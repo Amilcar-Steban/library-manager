@@ -1,5 +1,5 @@
 package model;
 
 public interface Catalogable {
-    public void obtenerInfo();
+    public String obtenerInfo();
 }
